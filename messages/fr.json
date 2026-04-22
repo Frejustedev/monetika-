@@ -229,6 +229,60 @@
       "empty": "Rien à afficher pour l\u2019instant."
     }
   },
+  "goals": {
+    "list": {
+      "title": "objectifs",
+      "subtitle": "{count, plural, =0 {Aucun objectif actif} one {1 objectif actif} other {# objectifs actifs}}",
+      "add": "Nouveau",
+      "activeOverline": "En cours",
+      "achievedOverline": "Atteints",
+      "empty": "Fixez votre premier objectif."
+    },
+    "new": {
+      "title": "nouvel objectif",
+      "subtitle": "Un cap précis, une date, une contribution mensuelle.",
+      "back": "Retour aux objectifs",
+      "fields": {
+        "name": "Nom de l\u2019objectif",
+        "namePlaceholder": "Ex : Fonds urgence 6 mois",
+        "targetAmount": "Montant cible ({currency})",
+        "targetDate": "Date cible",
+        "startingAmount": "Montant déjà épargné ({currency})",
+        "startingHint": "Laissez à 0 si vous commencez de zéro.",
+        "bucket": "Bucket stratégique",
+        "account": "Compte d\u2019épargne (optionnel)",
+        "noAccount": "Pas de compte lié"
+      },
+      "monthlyCalc": {
+        "overline": "Contribution recommandée",
+        "body": "Pour tenir la date, déposez {amount} par mois."
+      },
+      "submit": "Créer l\u2019objectif",
+      "submitting": "Création"
+    },
+    "detail": {
+      "achieved": "Objectif atteint",
+      "progress": "Progression actuelle",
+      "targetDate": "Date cible",
+      "projection": "Projection",
+      "contributeOverline": "Contribuer maintenant",
+      "contributeHint": "Contribution recommandée : {amount} / mois",
+      "historyOverline": "Historique des contributions",
+      "contribute": {
+        "amount": "Montant ({currency})",
+        "note": "Note",
+        "notePlaceholder": "Paiement du mois",
+        "save": "Enregistrer la contribution",
+        "saving": "Enregistrement"
+      },
+      "back": "Retour aux objectifs",
+      "delete": "Supprimer",
+      "confirmDelete": "Confirmer ?",
+      "cancel": "Annuler",
+      "deleteConfirm": "Supprimer",
+      "deleting": "Suppression"
+    }
+  },
   "budget": {
     "title": "budget",
     "subtitle": "Plafonds mensuels par catégorie. Tap pour éditer.",

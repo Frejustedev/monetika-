@@ -229,6 +229,60 @@
       "empty": "Nothing to show yet."
     }
   },
+  "goals": {
+    "list": {
+      "title": "goals",
+      "subtitle": "{count, plural, =0 {No active goals} one {1 active goal} other {# active goals}}",
+      "add": "New",
+      "activeOverline": "In progress",
+      "achievedOverline": "Achieved",
+      "empty": "Set your first goal."
+    },
+    "new": {
+      "title": "new goal",
+      "subtitle": "A precise target, a date, a monthly contribution.",
+      "back": "Back to goals",
+      "fields": {
+        "name": "Goal name",
+        "namePlaceholder": "e.g. 6-month emergency fund",
+        "targetAmount": "Target amount ({currency})",
+        "targetDate": "Target date",
+        "startingAmount": "Already saved ({currency})",
+        "startingHint": "Leave 0 if starting from scratch.",
+        "bucket": "Strategy bucket",
+        "account": "Savings account (optional)",
+        "noAccount": "No linked account"
+      },
+      "monthlyCalc": {
+        "overline": "Recommended contribution",
+        "body": "To hit the date, deposit {amount} per month."
+      },
+      "submit": "Create goal",
+      "submitting": "Creating"
+    },
+    "detail": {
+      "achieved": "Goal achieved",
+      "progress": "Current progress",
+      "targetDate": "Target date",
+      "projection": "Projection",
+      "contributeOverline": "Contribute now",
+      "contributeHint": "Recommended: {amount} / month",
+      "historyOverline": "Contribution history",
+      "contribute": {
+        "amount": "Amount ({currency})",
+        "note": "Note",
+        "notePlaceholder": "This month",
+        "save": "Save contribution",
+        "saving": "Saving"
+      },
+      "back": "Back to goals",
+      "delete": "Delete",
+      "confirmDelete": "Confirm?",
+      "cancel": "Cancel",
+      "deleteConfirm": "Delete",
+      "deleting": "Deleting"
+    }
+  },
   "budget": {
     "title": "budget",
     "subtitle": "Monthly caps per category. Tap to edit.",

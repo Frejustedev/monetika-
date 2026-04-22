@@ -394,7 +394,51 @@ async function main() {
     });
   }
 
-  // 5. Budgets par défaut cohérents avec les dépenses seed
+  // 5. Objectifs exemples
+  await prisma.goal.deleteMany({ where: { userId: user.id } });
+  const inMonths = (months: number): Date => {
+    const d = new Date();
+    d.setMonth(d.getMonth() + months);
+    return d;
+  };
+  await prisma.goal.createMany({
+    data: [
+      {
+        userId: user.id,
+        name: 'Fonds urgence 6 mois',
+        targetAmount: 3_000_000,
+        currency: 'XOF',
+        targetDate: inMonths(18),
+        startingAmount: 600_000,
+        currentAmount: 600_000,
+        strategyBucket: StrategyBucket.EMERGENCY,
+        accountId: epargne.id,
+      },
+      {
+        userId: user.id,
+        name: 'Ordinateur portable',
+        targetAmount: 450_000,
+        currency: 'XOF',
+        targetDate: inMonths(6),
+        startingAmount: 0,
+        currentAmount: 75_000,
+        strategyBucket: StrategyBucket.INVESTMENT,
+        accountId: momo.id,
+      },
+      {
+        userId: user.id,
+        name: 'Voyage Dakar décembre',
+        targetAmount: 800_000,
+        currency: 'XOF',
+        targetDate: inMonths(8),
+        startingAmount: 50_000,
+        currentAmount: 180_000,
+        strategyBucket: StrategyBucket.JOY,
+      },
+    ],
+  });
+
+  // 6. Budgets par défaut cohérents avec les dépenses seed
   await prisma.budget.deleteMany({ where: { userId: user.id } });
   for (const b of DEFAULT_BUDGETS) {
     const cat = catByKey.get(b.key);
@@ -413,7 +457,7 @@ async function main() {
   }
 
   console.log(
-    `Seed: user ${user.email} · ${createdAccounts.length} comptes · ${tx.length} transactions · ${DEFAULT_BUDGETS.length} budgets`,
+    `Seed: user ${user.email} · ${createdAccounts.length} comptes · ${tx.length} transactions · ${DEFAULT_BUDGETS.length} budgets · 3 objectifs`,
   );
 }
 
