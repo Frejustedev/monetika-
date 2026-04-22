@@ -229,6 +229,31 @@
       "empty": "Nothing to show yet."
     }
   },
+  "insights": {
+    "title": "summary",
+    "subtitle": "What you lived, in numbers.",
+    "tabs": {
+      "month": "This month",
+      "year": "This year"
+    },
+    "month": {
+      "income": "Income",
+      "expense": "Expenses",
+      "savingsRate": "Savings rate",
+      "strategyOverline": "Strategic allocation",
+      "incomeOverline": "Income by source",
+      "expenseTreemap": "Expenses by category",
+      "empty": "No data."
+    },
+    "year": {
+      "totalIncome": "Yearly income",
+      "totalExpense": "Yearly expenses",
+      "monthlyBars": "Monthly evolution",
+      "topCategories": "Top expense categories",
+      "goalsProgress": "Goals progress",
+      "empty": "No data yet."
+    }
+  },
   "score": {
     "title": "financial momentum note",
     "subtitle": "Computed on {date}. Valid ~24h, refreshed nightly.",

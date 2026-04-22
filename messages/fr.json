@@ -229,6 +229,31 @@
       "empty": "Rien à afficher pour l\u2019instant."
     }
   },
+  "insights": {
+    "title": "récapitulatif",
+    "subtitle": "Ce que vous avez vécu, en chiffres.",
+    "tabs": {
+      "month": "Ce mois",
+      "year": "Cette année"
+    },
+    "month": {
+      "income": "Revenus",
+      "expense": "Dépenses",
+      "savingsRate": "Taux d\u2019épargne",
+      "strategyOverline": "Répartition stratégique",
+      "incomeOverline": "Revenus par source",
+      "expenseTreemap": "Dépenses par catégorie",
+      "empty": "Aucune donnée."
+    },
+    "year": {
+      "totalIncome": "Revenus de l\u2019année",
+      "totalExpense": "Dépenses de l\u2019année",
+      "monthlyBars": "Évolution mensuelle",
+      "topCategories": "Top catégories de dépense",
+      "goalsProgress": "Progression des objectifs",
+      "empty": "Pas encore de données."
+    }
+  },
   "score": {
     "title": "note d\u2019évolution",
     "subtitle": "Relevé calculé le {date}. Valable ~24 h, recalculé chaque nuit.",
