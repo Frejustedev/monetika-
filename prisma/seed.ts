@@ -10,24 +10,60 @@ const prisma = new PrismaClient();
 
 // —— Catégories système ——
 const SYSTEM_CATEGORIES = [
+  // Nécessités (bucket N)
   { key: 'rent', label: 'Loyer', icon: 'house', color: '#1F4D3F', bucket: StrategyBucket.NECESSITIES },
   { key: 'groceries', label: 'Courses', icon: 'basket', color: '#5B7A5E', bucket: StrategyBucket.NECESSITIES },
   { key: 'fuel', label: 'Carburant', icon: 'fuel', color: '#8B4A2B', bucket: StrategyBucket.NECESSITIES },
   { key: 'transport', label: 'Transport', icon: 'car', color: '#4A6B8A', bucket: StrategyBucket.NECESSITIES },
-  { key: 'restaurant', label: 'Restaurant', icon: 'knife', color: '#C89A3C', bucket: StrategyBucket.JOY },
   { key: 'utilities', label: 'Électricité · eau', icon: 'lightning', color: '#5B7A5E', bucket: StrategyBucket.NECESSITIES },
   { key: 'telecom', label: 'Téléphone · internet', icon: 'phone', color: '#4A6B8A', bucket: StrategyBucket.NECESSITIES },
-  { key: 'health', label: 'Santé', icon: 'heartbeat', color: '#B8552D', bucket: StrategyBucket.EMERGENCY },
-  { key: 'school', label: 'Scolarité', icon: 'book', color: '#C89A3C', bucket: StrategyBucket.EDUCATION },
-  { key: 'clothes', label: 'Habillement', icon: 'tshirt', color: '#8B4A2B', bucket: StrategyBucket.JOY },
-  { key: 'family', label: 'Aide familiale', icon: 'users', color: '#5B7A5E', bucket: StrategyBucket.GIVE },
-  { key: 'tontine', label: 'Tontine', icon: 'coins', color: '#C89A3C', bucket: StrategyBucket.INVESTMENT },
-  { key: 'subscriptions', label: 'Abonnements', icon: 'repeat', color: '#4A6B8A', bucket: StrategyBucket.JOY },
-  { key: 'ceremony', label: 'Cérémonies', icon: 'gift', color: '#B8552D', bucket: StrategyBucket.GIVE },
   { key: 'salary', label: 'Salaire', icon: 'briefcase', color: '#1F4D3F', bucket: StrategyBucket.NECESSITIES },
   { key: 'freelance', label: 'Activité secondaire', icon: 'laptop', color: '#4A6B8A', bucket: StrategyBucket.NECESSITIES },
   { key: 'remittance', label: 'Transfert reçu', icon: 'arrow-down', color: '#5B7A5E', bucket: StrategyBucket.NECESSITIES },
+  { key: 'household', label: 'Entretien logement', icon: 'house', color: '#8B4A2B', bucket: StrategyBucket.NECESSITIES },
+  { key: 'taxes', label: 'Impôts · taxes', icon: 'briefcase', color: '#4A6B8A', bucket: StrategyBucket.NECESSITIES },
+  { key: 'insurance', label: 'Assurance', icon: 'wallet', color: '#5B7A5E', bucket: StrategyBucket.NECESSITIES },
+
+  // Urgence (bucket EMERGENCY)
+  { key: 'health', label: 'Santé', icon: 'heartbeat', color: '#B8552D', bucket: StrategyBucket.EMERGENCY },
+  { key: 'pharmacy', label: 'Pharmacie', icon: 'heartbeat', color: '#B8552D', bucket: StrategyBucket.EMERGENCY },
+  { key: 'repair', label: 'Réparation urgente', icon: 'lightning', color: '#B8552D', bucket: StrategyBucket.EMERGENCY },
+
+  // Éducation (bucket EDUCATION)
+  { key: 'school', label: 'Scolarité', icon: 'book', color: '#C89A3C', bucket: StrategyBucket.EDUCATION },
+  { key: 'books', label: 'Livres · formation', icon: 'book', color: '#C89A3C', bucket: StrategyBucket.EDUCATION },
+  { key: 'children', label: 'Frais enfants', icon: 'users', color: '#C89A3C', bucket: StrategyBucket.EDUCATION },
+
+  // Investissement (bucket INVESTMENT)
+  { key: 'tontine', label: 'Tontine', icon: 'coins', color: '#C89A3C', bucket: StrategyBucket.INVESTMENT },
   { key: 'dividends', label: 'Dividendes', icon: 'chart', color: '#8B4A2B', bucket: StrategyBucket.INVESTMENT },
+  { key: 'brokerage', label: 'Courtage · BRVM', icon: 'chart', color: '#4A6B8A', bucket: StrategyBucket.INVESTMENT },
+
+  // Joie (bucket JOY)
+  { key: 'restaurant', label: 'Restaurant', icon: 'knife', color: '#C89A3C', bucket: StrategyBucket.JOY },
+  { key: 'clothes', label: 'Habillement', icon: 'tshirt', color: '#8B4A2B', bucket: StrategyBucket.JOY },
+  { key: 'subscriptions', label: 'Abonnements', icon: 'repeat', color: '#4A6B8A', bucket: StrategyBucket.JOY },
+  { key: 'leisure', label: 'Loisirs · sorties', icon: 'knife', color: '#C89A3C', bucket: StrategyBucket.JOY },
+  { key: 'beauty', label: 'Beauté · coiffure', icon: 'tshirt', color: '#C89A3C', bucket: StrategyBucket.JOY },
+  { key: 'travel', label: 'Voyages', icon: 'car', color: '#4A6B8A', bucket: StrategyBucket.JOY },
+  { key: 'cafe', label: 'Café · boissons', icon: 'knife', color: '#8B4A2B', bucket: StrategyBucket.JOY },
+
+  // Partage (bucket GIVE)
+  { key: 'family', label: 'Aide familiale', icon: 'users', color: '#5B7A5E', bucket: StrategyBucket.GIVE },
+  { key: 'ceremony', label: 'Cérémonies', icon: 'gift', color: '#B8552D', bucket: StrategyBucket.GIVE },
+  { key: 'donation', label: 'Don · offrande', icon: 'gift', color: '#5B7A5E', bucket: StrategyBucket.GIVE },
+];
+
+// —— Budgets par défaut pour l'utilisateur démo ——
+const DEFAULT_BUDGETS = [
+  { key: 'rent', limit: 180_000 },
+  { key: 'groceries', limit: 120_000 },
+  { key: 'fuel', limit: 55_000 },
+  { key: 'restaurant', limit: 40_000 },
+  { key: 'utilities', limit: 45_000 },
+  { key: 'telecom', limit: 20_000 },
+  { key: 'tontine', limit: 30_000 },
+  { key: 'subscriptions', limit: 10_000 },
 ];
 
 async function main() {
@@ -358,7 +394,27 @@ async function main() {
     });
   }
 
-  console.log(`Seed: user ${user.email} · ${createdAccounts.length} comptes · ${tx.length} transactions`);
+  // 5. Budgets par défaut cohérents avec les dépenses seed
+  await prisma.budget.deleteMany({ where: { userId: user.id } });
+  for (const b of DEFAULT_BUDGETS) {
+    const cat = catByKey.get(b.key);
+    if (!cat) continue;
+    await prisma.budget.create({
+      data: {
+        userId: user.id,
+        categoryId: cat.id,
+        monthlyLimit: b.limit,
+        currency: 'XOF',
+        alertAt70: true,
+        alertAt90: true,
+        blockAt100: false,
+      },
+    });
+  }
+
+  console.log(
+    `Seed: user ${user.email} · ${createdAccounts.length} comptes · ${tx.length} transactions · ${DEFAULT_BUDGETS.length} budgets`,
+  );
 }
 
 main()

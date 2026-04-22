@@ -229,6 +229,30 @@
       "empty": "Nothing to show yet."
     }
   },
+  "budget": {
+    "title": "budget",
+    "subtitle": "Monthly caps per category. Tap to edit.",
+    "totalsSpent": "Spent this month",
+    "totalsBudget": "Total budget",
+    "active": "Capped",
+    "unbudgeted": "No cap",
+    "empty": "No budget yet. Add one.",
+    "addBudget": "New budget",
+    "pickCategory": "Pick a category",
+    "pickCategoryHint": "Already-budgeted categories are hidden.",
+    "edit": {
+      "close": "Close",
+      "monthlyLimit": "Monthly cap ({currency})",
+      "limitHint": "Enter 0 to remove the cap.",
+      "alerts": "Alerts",
+      "alert70": "Alert at 70%",
+      "alert90": "Alert at 90%",
+      "block100": "Block entries at 100%",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving"
+    }
+  },
   "transactions": {
     "list": {
       "title": "entries",

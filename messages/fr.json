@@ -229,6 +229,30 @@
       "empty": "Rien à afficher pour l\u2019instant."
     }
   },
+  "budget": {
+    "title": "budget",
+    "subtitle": "Plafonds mensuels par catégorie. Tap pour éditer.",
+    "totalsSpent": "Dépensé ce mois",
+    "totalsBudget": "Budget total",
+    "active": "Avec plafond",
+    "unbudgeted": "Sans plafond",
+    "empty": "Aucun budget défini. Ajoutez-en un.",
+    "addBudget": "Nouveau budget",
+    "pickCategory": "Choisissez une catégorie",
+    "pickCategoryHint": "Les catégories déjà budgétées sont masquées.",
+    "edit": {
+      "close": "Fermer",
+      "monthlyLimit": "Plafond mensuel ({currency})",
+      "limitHint": "Saisir 0 pour retirer le plafond.",
+      "alerts": "Alertes",
+      "alert70": "Alerte à 70 % du plafond",
+      "alert90": "Alerte à 90 % du plafond",
+      "block100": "Bloquer la saisie à 100 %",
+      "cancel": "Annuler",
+      "save": "Enregistrer",
+      "saving": "Enregistrement"
+    }
+  },
   "transactions": {
     "list": {
       "title": "mouvements",
