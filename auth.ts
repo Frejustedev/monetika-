@@ -1,21 +1,16 @@
-// Monétika — configuration Auth.js v5.
-// Deux providers sur un backend unique (Credentials) :
-//   - "magic": trust le token déjà consommé côté server action, identifie par email
-//   - "pin"  : email + PIN 6 chiffres vérifié en bcrypt
-// Session JWT, pas de DB sessions (nous gardons notre modèle Session pour l'audit).
+// Monétika — configuration Auth.js v5 complète (runtime node).
+// Providers, callbacks DB et helpers. Le middleware edge utilise auth.config.ts à la place.
 
-import NextAuth, { type NextAuthConfig } from 'next-auth';
+import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import { prisma } from '@/lib/db/client';
 import { verifyPin } from '@/lib/auth/pin';
 import { rateLimitPinAttempt } from '@/lib/auth/rate-limit';
+import { authConfig } from './auth.config';
 
 const magicSchema = z.object({
   email: z.string().email(),
-  // Un secret partagé entre l'action serveur qui a consommé le token
-  // et le callback signIn. Empêche l'appel direct du provider depuis un client.
-  // La value est dérivée d'AUTH_SECRET + email + timestamp court.
   intent: z.string().min(16),
 });
 
@@ -24,14 +19,8 @@ const pinSchema = z.object({
   pin: z.string().regex(/^\d{6}$/u),
 });
 
-export const authConfig: NextAuthConfig = {
-  trustHost: true,
-  session: { strategy: 'jwt', maxAge: 60 * 60 * 24 * 7 }, // 7 jours
-  pages: {
-    signIn: '/login',
-    verifyRequest: '/verify',
-    error: '/login',
-  },
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   providers: [
     Credentials({
       id: 'magic',
@@ -43,13 +32,10 @@ export const authConfig: NextAuthConfig = {
       async authorize(creds) {
         const parsed = magicSchema.safeParse(creds);
         if (!parsed.success) return null;
-
         const { email, intent } = parsed.data;
         const secret = process.env.AUTH_SECRET ?? '';
         if (!secret) return null;
 
-        // L'intent est signé par verifyMagicTokenIntent côté server action.
-        // Ici on vérifie uniquement la structure + fraîcheur.
         const [timestamp, signature] = intent.split('.');
         if (!timestamp || !signature) return null;
         const ts = Number(timestamp);
@@ -71,7 +57,6 @@ export const authConfig: NextAuthConfig = {
         });
         if (!user) return null;
 
-        // Marque l'email comme vérifié si ce n'est pas déjà fait.
         await prisma.user.update({
           where: { id: user.id },
           data: { emailVerified: new Date() },
@@ -96,7 +81,6 @@ export const authConfig: NextAuthConfig = {
       async authorize(creds) {
         const parsed = pinSchema.safeParse(creds);
         if (!parsed.success) return null;
-
         const { email, pin } = parsed.data;
         const user = await prisma.user.findUnique({
           where: { email: email.toLowerCase() },
@@ -129,13 +113,17 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, trigger }) {
+    ...authConfig.callbacks,
+    // Côté node : on rafraîchit le token depuis la DB quand `update()` est déclenché
+    // (ex. après l'étape VII de l'onboarding pour propager onboardedAt).
+    async jwt({ token, user, trigger, session }) {
+      // Applique d'abord la logique edge-safe.
       if (user) {
         token.id = user.id;
-        token.onboardedAt = (user as { onboardedAt?: string | null }).onboardedAt ?? null;
-        token.locale = (user as { locale?: string }).locale ?? 'fr';
+        const u = user as { onboardedAt?: string | null; locale?: string };
+        token.onboardedAt = u.onboardedAt ?? null;
+        token.locale = u.locale ?? 'fr';
       }
-      // Rafraîchit onboardedAt quand l'app le demande (après l'étape VII).
       if (trigger === 'update' && token.id) {
         const u = await prisma.user.findUnique({
           where: { id: token.id as string },
@@ -146,20 +134,17 @@ export const authConfig: NextAuthConfig = {
           token.locale = u.locale;
         }
       }
+      // Permet un update manuel via session.update({...}).
+      if (trigger === 'update' && session && typeof session === 'object') {
+        const patch = session as { onboardedAt?: string | null };
+        if ('onboardedAt' in patch) token.onboardedAt = patch.onboardedAt ?? null;
+      }
       return token;
     },
-    async session({ session, token }) {
-      if (token.id) {
-        session.user.id = token.id as string;
-        session.user.onboardedAt = (token.onboardedAt as string | null) ?? null;
-        session.user.locale = (token.locale as string) ?? 'fr';
-      }
-      return session;
-    },
   },
-};
+});
 
-// Signature HMAC-SHA256 via Web Crypto — compatible edge runtime.
+// HMAC-SHA256 via Web Crypto — compatible node 20+ et edge.
 async function sign(payload: string, secret: string): Promise<string> {
   const enc = new TextEncoder();
   const key = await crypto.subtle.importKey(
@@ -179,5 +164,3 @@ export const signMagicIntent = async (email: string): Promise<string> => {
   const signature = await sign(`${email.toLowerCase()}:${timestamp}`, secret);
   return `${timestamp}.${signature}`;
 };
-
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);

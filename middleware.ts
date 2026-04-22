@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@/auth';
+import NextAuth from 'next-auth';
+import { authConfig } from './auth.config';
 
-// Routes strictement protégées — redirige vers /login si non authentifié.
+// Instance Auth.js minimale pour le middleware edge — pas de providers,
+// pas de Prisma, juste la lecture du JWT et les callbacks edge-safe.
+const { auth } = NextAuth(authConfig);
+
 const PROTECTED_PREFIXES = [
   '/dashboard',
   '/accounts',
@@ -13,7 +17,6 @@ const PROTECTED_PREFIXES = [
   '/settings',
 ];
 const ONBOARDING_PREFIX = '/onboarding';
-// Pages d'auth — accessibles seulement si NON authentifié.
 const AUTH_PAGES = ['/login', '/signup', '/verify'];
 
 export default auth((req) => {
@@ -28,7 +31,6 @@ export default auth((req) => {
     (p) => pathname === p || pathname.startsWith(`${p}/`),
   );
 
-  // Pas connecté : seules les pages d'auth et la home publique sont accessibles.
   if (!session?.user) {
     if (isProtected || isOnboarding) {
       const url = req.nextUrl.clone();
@@ -39,7 +41,6 @@ export default auth((req) => {
     return NextResponse.next();
   }
 
-  // Connecté mais pas onboardé → forcer /onboarding/I (sauf déjà en onboarding ou sur une page auth/verify).
   if (!session.user.onboardedAt) {
     if (!isOnboarding && !isAuthPage) {
       const url = req.nextUrl.clone();
@@ -48,7 +49,6 @@ export default auth((req) => {
     }
   }
 
-  // Connecté & onboardé → pages auth et onboarding redirigent vers la home (dashboard).
   if (session.user.onboardedAt && (isAuthPage || isOnboarding)) {
     const url = req.nextUrl.clone();
     url.pathname = '/';
@@ -60,6 +60,6 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    '/((?!api/auth|_next/static|_next/image|favicon.ico|manifest.webmanifest|icons/|marks/|fonts/|og-image|robots.txt|sitemap.xml).*)',
+    '/((?!api/auth|_next/static|_next/image|favicon.ico|manifest.webmanifest|icons/|marks/|fonts/|splash/|og-image|sw.js|robots.txt|sitemap.xml).*)',
   ],
 };
