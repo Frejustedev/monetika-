@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { cookies } from 'next/headers';
 import { fraunces, instrumentSans, geistMono } from './fonts';
+import { ServiceWorkerRegistry } from '@/components/system/ServiceWorkerRegistry';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -50,6 +51,37 @@ export const metadata: Metadata = {
     description: 'Un journal financier pour l\u2019Afrique.',
     images: ['/og-image.png'],
   },
+  appleWebApp: {
+    capable: true,
+    title: 'Monétika',
+    statusBarStyle: 'default',
+    startupImage: [
+      {
+        url: '/splash/splash-iphone-14-light.png',
+        media: '(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (prefers-color-scheme: light)',
+      },
+      {
+        url: '/splash/splash-iphone-14-dark.png',
+        media: '(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (prefers-color-scheme: dark)',
+      },
+      {
+        url: '/splash/splash-iphone-14pm-light.png',
+        media: '(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (prefers-color-scheme: light)',
+      },
+      {
+        url: '/splash/splash-iphone-14pm-dark.png',
+        media: '(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (prefers-color-scheme: dark)',
+      },
+      {
+        url: '/splash/splash-ipad-pro-light.png',
+        media: '(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (prefers-color-scheme: light)',
+      },
+      {
+        url: '/splash/splash-ipad-pro-dark.png',
+        media: '(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (prefers-color-scheme: dark)',
+      },
+    ],
+  },
   formatDetection: { telephone: false, email: false, address: false },
 };
 
@@ -84,6 +116,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>
+        <ServiceWorkerRegistry />
       </body>
     </html>
   );
