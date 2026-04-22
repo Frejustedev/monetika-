@@ -229,6 +229,24 @@
       "empty": "Rien à afficher pour l\u2019instant."
     }
   },
+  "transactions": {
+    "list": {
+      "title": "mouvements",
+      "subtitle": "{count, plural, =0 {Aucun mouvement} one {1 mouvement} other {# mouvements}}",
+      "add": "Saisir",
+      "empty": "Aucun mouvement à afficher."
+    },
+    "new": {
+      "title": "nouvelle entrée",
+      "close": "Fermer",
+      "save": "Enregistrer",
+      "saving": "Enregistrement",
+      "account": "Compte débité",
+      "from": "Depuis",
+      "to": "Vers",
+      "notePlaceholder": "Note (facultatif)"
+    }
+  },
   "accounts": {
     "list": {
       "title": "comptes",

@@ -15,6 +15,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname),
+      // Next.js `server-only` est un marqueur runtime — no-op en test.
+      'server-only': path.resolve(__dirname, 'tests/shims/server-only.ts'),
     },
   },
 });
