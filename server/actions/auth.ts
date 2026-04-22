@@ -2,10 +2,10 @@
 
 import { z } from 'zod';
 import { prisma } from '@/lib/db/client';
-import { createMagicLinkToken, consumeMagicLinkToken } from '@/lib/auth/magic-link';
+import { createMagicLinkToken } from '@/lib/auth/magic-link';
 import { renderMagicLinkEmail, sendTransactionalEmail } from '@/lib/auth/email';
 import { rateLimitMagicLink } from '@/lib/auth/rate-limit';
-import { signIn, signMagicIntent } from '@/auth';
+import { signIn } from '@/auth';
 
 const signupSchema = z.object({
   email: z.string().trim().toLowerCase().email('E-mail invalide.'),
@@ -61,7 +61,7 @@ export async function signupAction(_prev: ActionResult | undefined, formData: Fo
 
   const { rawToken } = await createMagicLinkToken(email);
   const base = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
-  const link = `${base}/verify?token=${encodeURIComponent(rawToken)}&email=${encodeURIComponent(email)}`;
+  const link = `${base}/api/auth/verify-magic?token=${encodeURIComponent(rawToken)}&email=${encodeURIComponent(email)}`;
 
   const { html, text, subject } = renderMagicLinkEmail({
     link,
@@ -106,7 +106,7 @@ export async function requestMagicLinkAction(_prev: ActionResult | undefined, fo
 
   const { rawToken } = await createMagicLinkToken(email);
   const base = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
-  const link = `${base}/verify?token=${encodeURIComponent(rawToken)}&email=${encodeURIComponent(email)}`;
+  const link = `${base}/api/auth/verify-magic?token=${encodeURIComponent(rawToken)}&email=${encodeURIComponent(email)}`;
   const { html, text, subject } = renderMagicLinkEmail({
     link,
     firstName: user.firstName,
@@ -122,37 +122,9 @@ export async function requestMagicLinkAction(_prev: ActionResult | undefined, fo
   return { ok: true, message: 'E-mail envoyé.' };
 }
 
-const verifySchema = z.object({
-  email: z.string().trim().toLowerCase().email(),
-  token: z.string().min(10),
-});
-
-type VerifyResult =
-  | { ok: true; redirectTo: string }
-  | { ok: false; error: 'invalid' | 'expired' | 'internal' };
-
-export async function verifyMagicLinkAction(input: { email: string; token: string }): Promise<VerifyResult> {
-  const parsed = verifySchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: 'invalid' };
-  const { email, token } = parsed.data;
-
-  const result = await consumeMagicLinkToken(token, email);
-  if (!result.ok) return { ok: false, error: result.reason === 'expired' ? 'expired' : 'invalid' };
-
-  const intent = await signMagicIntent(email);
-  try {
-    await signIn('magic', { email, intent, redirect: false });
-  } catch (error) {
-    console.error('[verifyMagicLinkAction] signIn error', error);
-    return { ok: false, error: 'internal' };
-  }
-
-  const user = await prisma.user.findUnique({
-    where: { email },
-    select: { onboardedAt: true },
-  });
-  return { ok: true, redirectTo: user?.onboardedAt ? '/' : '/onboarding/I' };
-}
+// NB : la vérification du magic link est désormais gérée côté Route Handler
+// /api/auth/verify-magic (Route Handler = écriture cookie garantie).
+// Cette action avait un bug de cookie dans le pattern Server Component.
 
 const pinLoginSchema = z.object({
   email: z.string().trim().toLowerCase().email(),
