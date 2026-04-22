@@ -192,6 +192,116 @@
     "goals": "Objectifs",
     "insights": "Récapitulatif",
     "score": "Note",
-    "settings": "Réglages"
+    "settings": "Réglages",
+    "sidebar": "Navigation principale",
+    "tagline": "Journal financier"
+  },
+  "navBottom": {
+    "label": "Navigation",
+    "items": {
+      "home": "Accueil",
+      "accounts": "Comptes",
+      "add": "Ajouter",
+      "insights": "Récap",
+      "more": "Plus"
+    }
+  },
+  "dashboard": {
+    "netWorth": {
+      "overline": "Patrimoine net",
+      "multiCurrency": "{count, plural, one {# autre devise} other {# autres devises}} non comptés"
+    },
+    "strategy": {
+      "overline": "Stratégie 6 comptes",
+      "adjust": "Ajuster"
+    },
+    "insight": {
+      "overline": "Insight du jour"
+    },
+    "accounts": {
+      "overline": "Comptes",
+      "all": "Tout voir",
+      "empty": "Aucun compte encore."
+    },
+    "recent": {
+      "overline": "Mouvements récents",
+      "all": "Tout voir",
+      "empty": "Rien à afficher pour l\u2019instant."
+    }
+  },
+  "accounts": {
+    "list": {
+      "title": "comptes",
+      "subtitle": "{count, plural, =0 {Aucun compte actif} one {1 compte actif} other {# comptes actifs}}",
+      "add": "Nouveau",
+      "totalOverline": "Total devise principale",
+      "activeOverline": "Actifs",
+      "archivedOverline": "Archivés",
+      "empty": "Ajoutez votre premier compte."
+    },
+    "create": {
+      "title": "nouveau compte",
+      "subtitle": "Ajoutez un compte bancaire, MoMo, titres ou espèces.",
+      "back": "Retour à la liste",
+      "fields": {
+        "kind": "Type",
+        "institution": "Institution",
+        "institutionPlaceholder": "Ex : Ecobank",
+        "label": "Libellé",
+        "labelPlaceholder": "Ex : Compte courant",
+        "currency": "Devise",
+        "currencyHint": "XOF, NGN, GHS, EUR, USD, …",
+        "balance": "Solde actuel",
+        "bucket": "Rattacher à",
+        "color": "Couleur"
+      },
+      "kinds": {
+        "BANK_CHECKING": "Courant",
+        "BANK_SAVINGS": "Épargne",
+        "BANK_TERM": "À terme",
+        "BANK_PRO": "Pro",
+        "MOBILE_MONEY": "Mobile Money",
+        "SECURITIES": "Titres",
+        "CASH": "Espèces",
+        "OTHER": "Autre"
+      },
+      "submit": "Créer le compte",
+      "submitting": "Création"
+    },
+    "detail": {
+      "balance": "Solde",
+      "reconciledAt": "Dernier rapprochement : {date}",
+      "history": "Historique",
+      "exportCsv": "Exporter CSV",
+      "empty": "Aucun mouvement sur ce compte.",
+      "back": "Retour aux comptes",
+      "kinds": {
+        "BANK_CHECKING": "Courant",
+        "BANK_SAVINGS": "Épargne",
+        "BANK_TERM": "À terme",
+        "BANK_PRO": "Pro",
+        "MOBILE_MONEY": "Mobile Money",
+        "SECURITIES": "Titres",
+        "CASH": "Espèces",
+        "OTHER": "Autre"
+      },
+      "adjust": {
+        "overline": "Ajuster le solde",
+        "body": "Recalibrez après vérification de votre relevé réel.",
+        "open": "Ajuster",
+        "newBalance": "Nouveau solde ({currency})",
+        "note": "Note (optionnel)",
+        "notePlaceholder": "Relevé du 20 avril",
+        "save": "Enregistrer",
+        "saving": "Enregistrement",
+        "cancel": "Annuler"
+      },
+      "block": {
+        "overline": "Blocage applicatif",
+        "body": "Empêche toute nouvelle saisie sur ce compte, sans le supprimer.",
+        "block": "Bloquer le compte",
+        "unblock": "Débloquer le compte"
+      }
+    }
   }
 }

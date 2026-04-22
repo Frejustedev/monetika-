@@ -3,6 +3,7 @@ import { auth } from '@/auth';
 
 // Routes strictement protégées — redirige vers /login si non authentifié.
 const PROTECTED_PREFIXES = [
+  '/dashboard',
   '/accounts',
   '/transactions',
   '/budget',

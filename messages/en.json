@@ -192,6 +192,116 @@
     "goals": "Goals",
     "insights": "Summary",
     "score": "Note",
-    "settings": "Settings"
+    "settings": "Settings",
+    "sidebar": "Main navigation",
+    "tagline": "Financial journal"
+  },
+  "navBottom": {
+    "label": "Navigation",
+    "items": {
+      "home": "Home",
+      "accounts": "Accounts",
+      "add": "Add",
+      "insights": "Summary",
+      "more": "More"
+    }
+  },
+  "dashboard": {
+    "netWorth": {
+      "overline": "Net worth",
+      "multiCurrency": "{count, plural, one {# other currency} other {# other currencies}} not counted"
+    },
+    "strategy": {
+      "overline": "6-bucket strategy",
+      "adjust": "Adjust"
+    },
+    "insight": {
+      "overline": "Today\u2019s insight"
+    },
+    "accounts": {
+      "overline": "Accounts",
+      "all": "View all",
+      "empty": "No accounts yet."
+    },
+    "recent": {
+      "overline": "Recent entries",
+      "all": "View all",
+      "empty": "Nothing to show yet."
+    }
+  },
+  "accounts": {
+    "list": {
+      "title": "accounts",
+      "subtitle": "{count, plural, =0 {No active accounts} one {1 active account} other {# active accounts}}",
+      "add": "New",
+      "totalOverline": "Primary currency total",
+      "activeOverline": "Active",
+      "archivedOverline": "Archived",
+      "empty": "Add your first account."
+    },
+    "create": {
+      "title": "new account",
+      "subtitle": "Add a bank, Mobile Money, securities or cash account.",
+      "back": "Back to list",
+      "fields": {
+        "kind": "Type",
+        "institution": "Institution",
+        "institutionPlaceholder": "e.g. Ecobank",
+        "label": "Label",
+        "labelPlaceholder": "e.g. Main checking",
+        "currency": "Currency",
+        "currencyHint": "XOF, NGN, GHS, EUR, USD, …",
+        "balance": "Current balance",
+        "bucket": "Attach to",
+        "color": "Colour"
+      },
+      "kinds": {
+        "BANK_CHECKING": "Checking",
+        "BANK_SAVINGS": "Savings",
+        "BANK_TERM": "Term",
+        "BANK_PRO": "Business",
+        "MOBILE_MONEY": "Mobile Money",
+        "SECURITIES": "Securities",
+        "CASH": "Cash",
+        "OTHER": "Other"
+      },
+      "submit": "Create account",
+      "submitting": "Creating"
+    },
+    "detail": {
+      "balance": "Balance",
+      "reconciledAt": "Last reconciled: {date}",
+      "history": "History",
+      "exportCsv": "Export CSV",
+      "empty": "No entries on this account.",
+      "back": "Back to accounts",
+      "kinds": {
+        "BANK_CHECKING": "Checking",
+        "BANK_SAVINGS": "Savings",
+        "BANK_TERM": "Term",
+        "BANK_PRO": "Business",
+        "MOBILE_MONEY": "Mobile Money",
+        "SECURITIES": "Securities",
+        "CASH": "Cash",
+        "OTHER": "Other"
+      },
+      "adjust": {
+        "overline": "Adjust balance",
+        "body": "Realign after checking your real statement.",
+        "open": "Adjust",
+        "newBalance": "New balance ({currency})",
+        "note": "Note (optional)",
+        "notePlaceholder": "Statement of April 20",
+        "save": "Save",
+        "saving": "Saving",
+        "cancel": "Cancel"
+      },
+      "block": {
+        "overline": "App-level block",
+        "body": "Prevents new entries on this account without deleting it.",
+        "block": "Block account",
+        "unblock": "Unblock account"
+      }
+    }
   }
 }

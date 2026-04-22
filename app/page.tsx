@@ -1,19 +1,19 @@
+import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { Wordmark } from '@/components/layout/Wordmark';
-import { auth, signOut } from '@/auth';
+import { auth } from '@/auth';
 
 export default async function HomePage() {
   const session = await auth();
-  if (session?.user?.onboardedAt) {
-    return <DashboardStub name={session.user.name ?? null} />;
-  }
+  if (session?.user?.onboardedAt) redirect('/dashboard');
+  if (session?.user && !session.user.onboardedAt) redirect('/onboarding/I');
+
   const t = await getTranslations('home');
 
   return (
     <main className="min-h-[100dvh] bg-background text-foreground">
       <div className="mx-auto flex min-h-[100dvh] max-w-3xl flex-col px-6 py-10 md:px-10 md:py-16">
-        {/* En-tête */}
         <header className="flex items-center justify-between">
           <Wordmark variant="full" tone="forest" className="h-9 w-auto" />
           <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
@@ -21,12 +21,8 @@ export default async function HomePage() {
           </span>
         </header>
 
-        {/* Avant-propos */}
         <section className="mt-24 md:mt-32">
-          <p
-            className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground"
-            aria-hidden="true"
-          >
+          <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground" aria-hidden>
             {t('overline')}
           </p>
           <h2
@@ -36,7 +32,7 @@ export default async function HomePage() {
             {t('title')}
           </h2>
           <p
-            className="mt-6 max-w-2xl text-base leading-[1.7] text-muted-foreground md:text-lg"
+            className="mt-6 max-w-2xl text-base leading-[1.7] md:text-lg"
             style={{ color: 'var(--foreground)', opacity: 0.78 }}
           >
             {t('lede')}
@@ -45,25 +41,22 @@ export default async function HomePage() {
           <ul className="mt-10 space-y-5 border-t border-border pt-8">
             {(['one', 'two', 'three'] as const).map((k, i) => (
               <li key={k} className="flex gap-5">
-                <span className="font-display italic text-[color:var(--ochre)]">
-                  {toRoman(i + 1)}
-                </span>
+                <span className="font-display italic text-[color:var(--ochre)]">{toRoman(i + 1)}</span>
                 <span className="text-base leading-[1.6]">{t(`bullets.${k}`)}</span>
               </li>
             ))}
           </ul>
         </section>
 
-        {/* CTA */}
         <section className="mt-auto flex flex-col gap-3 pt-16 sm:flex-row sm:items-center">
           <Link
             href="/signup"
-            className="group inline-flex items-center justify-center rounded-[10px] bg-[color:var(--primary)] px-6 py-3.5 text-[color:var(--primary-foreground)] transition-colors duration-[var(--dur-fast)] ease-[var(--ease-monetika)] hover:bg-[color:var(--primary-hover)] focus-visible:outline-none"
+            className="group inline-flex items-center justify-center rounded-[10px] bg-[color:var(--primary)] px-6 py-3.5 text-[color:var(--primary-foreground)] transition-colors duration-[var(--dur-fast)] ease-[var(--ease-monetika)] hover:bg-[color:var(--primary-hover)]"
           >
             <span className="font-medium">{t('cta')}</span>
             <span
               className="ml-3 font-display italic transition-transform duration-[var(--dur-fast)] group-hover:translate-x-0.5"
-              aria-hidden="true"
+              aria-hidden
             >
               →
             </span>
@@ -76,7 +69,6 @@ export default async function HomePage() {
           </Link>
         </section>
 
-        {/* Pied éditorial */}
         <footer className="mt-16 border-t border-border pt-6">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
             {t('footer')}
@@ -90,53 +82,4 @@ export default async function HomePage() {
 function toRoman(n: number): string {
   const numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
   return numerals[n - 1] ?? String(n);
-}
-
-// Stub dashboard — Phase 2 le remplacera par le vrai dashboard éditorial.
-function DashboardStub({ name }: { name: string | null }) {
-  return (
-    <main className="min-h-[100dvh] bg-background text-foreground">
-      <div className="mx-auto flex min-h-[100dvh] max-w-3xl flex-col px-6 py-10 md:px-10 md:py-14">
-        <header className="flex items-center justify-between">
-          <Wordmark variant="full" tone="forest" className="h-8 w-auto" />
-          <form
-            action={async () => {
-              'use server';
-              await signOut({ redirectTo: '/' });
-            }}
-          >
-            <button
-              type="submit"
-              className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground"
-            >
-              Se déconnecter
-            </button>
-          </form>
-        </header>
-
-        <section className="mt-16 md:mt-20">
-          <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-            Aujourd&rsquo;hui
-          </p>
-          <h1
-            className="mt-3 font-display font-medium leading-[1.05] tracking-[-0.02em]"
-            style={{ fontSize: 'clamp(2.25rem, 5vw, 3rem)' }}
-          >
-            {name ? `Bonjour, ${name}.` : 'Bonjour.'}
-          </h1>
-          <p className="mt-4 max-w-xl text-base leading-[1.7] text-muted-foreground">
-            Votre journal est actif. Le tableau de bord éditorial arrive en Phase 2 —
-            barre stratégique, liste des comptes, mouvements récents et insight du jour.
-          </p>
-          <div className="rule-ochre mt-6" />
-        </section>
-
-        <footer className="mt-auto border-t border-border pt-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-            Phase 1 · Auth &amp; onboarding · Avril 2026
-          </p>
-        </footer>
-      </div>
-    </main>
-  );
 }
