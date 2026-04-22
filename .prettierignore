@@ -1,0 +1,9 @@
+.next
+node_modules
+dist
+build
+public/fonts
+public/icons
+package-lock.json
+pnpm-lock.yaml
+prisma/migrations

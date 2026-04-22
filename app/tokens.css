@@ -1,0 +1,79 @@
+/*
+ * Monétika — Design Tokens · Sable & Forêt
+ * v1.0 · Avril 2026
+ */
+
+:root {
+  /* —— Couleurs brutes —— */
+  --ink: #17160f;
+  --paper: #f5f1e8;
+  --paper-deep: #ebe5d4;
+  --forest: #1f4d3f;
+  --forest-deep: #0e2a22;
+  --moss: #5b7a5e;
+  --ochre: #c89a3c;
+  --terracotta: #b8552d;
+  --clay: #8b4a2b;
+  --sky: #4a6b8a;
+  --bone: #d9d2bf;
+
+  /* —— Alias sémantiques —— */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --muted: var(--moss);
+  --muted-foreground: #6a6250;
+  --border: var(--bone);
+  --primary: var(--forest);
+  --primary-hover: var(--forest-deep);
+  --primary-foreground: var(--paper);
+  --accent: var(--ochre);
+  --destructive: var(--terracotta);
+  --surface: var(--paper-deep);
+  --surface-hover: #e4dcc5;
+
+  /* —— Rayons —— */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+
+  /* —— Espacement (grille 4px) —— */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* —— Mouvement —— */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-normal: 320ms;
+  --dur-slow: 500ms;
+}
+
+.dark,
+[data-theme='dark'] {
+  --background: var(--ink);
+  --foreground: var(--paper);
+  --muted: #8a8570;
+  --muted-foreground: #a39c84;
+  --border: rgba(217, 210, 191, 0.18);
+  --surface: var(--forest-deep);
+  --surface-hover: #143326;
+  --ochre: #d4a84a;
+  --forest: #2a6b57;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --background: var(--ink);
+    --foreground: var(--paper);
+    --muted: #8a8570;
+    --muted-foreground: #a39c84;
+    --border: rgba(217, 210, 191, 0.18);
+    --surface: var(--forest-deep);
+    --surface-hover: #143326;
+  }
+}

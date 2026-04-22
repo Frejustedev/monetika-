@@ -1,0 +1,50 @@
+{
+  "common": {
+    "appName": "Monétika",
+    "tagline": "A financial journal for Africa.",
+    "loading": "Loading",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "continue": "Continue",
+    "back": "Back"
+  },
+  "home": {
+    "overline": "Foreword",
+    "title": "Reclaim the rhythm of your money.",
+    "lede": "Monétika is a daily financial journal. No banking API, no gimmicks. Your numbers, your fingers, your judgement.",
+    "bullets": {
+      "one": "Log an expense in under five seconds.",
+      "two": "Allocate your income across six buckets — necessities, emergency, education, investment, joy, giving.",
+      "three": "Track your Financial Momentum Note month after month."
+    },
+    "cta": "Create my account",
+    "ctaSecondary": "Sign in",
+    "footer": "WAEMU · Nigeria · Ghana · April 2026"
+  },
+  "errors": {
+    "notFound": {
+      "overline": "Error",
+      "title": "This page does not exist.",
+      "body": "The link you followed may be stale, or the URL is misspelt.",
+      "cta": "Back to home"
+    },
+    "generic": {
+      "overline": "Error",
+      "title": "Something slipped.",
+      "body": "We logged the incident. Try again in a moment.",
+      "cta": "Retry"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "accounts": "Accounts",
+    "transactions": "Entries",
+    "budget": "Budget",
+    "goals": "Goals",
+    "insights": "Summary",
+    "score": "Note",
+    "settings": "Settings"
+  }
+}

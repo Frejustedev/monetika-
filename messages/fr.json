@@ -1,0 +1,50 @@
+{
+  "common": {
+    "appName": "Monétika",
+    "tagline": "Un journal financier pour l\u2019Afrique.",
+    "loading": "Chargement",
+    "retry": "Réessayer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "continue": "Continuer",
+    "back": "Retour"
+  },
+  "home": {
+    "overline": "Avant-propos",
+    "title": "Reprenez le pouls de votre argent.",
+    "lede": "Monétika est un journal financier quotidien. Pas d\u2019API bancaire, pas d\u2019artifice. Vos chiffres, vos doigts, votre discernement.",
+    "bullets": {
+      "one": "Saisissez une dépense en moins de cinq secondes.",
+      "two": "Répartissez votre revenu en six comptes — nécessités, urgence, éducation, investissement, joie, partage.",
+      "three": "Suivez votre Note d\u2019Évolution Financière mois après mois."
+    },
+    "cta": "Créer mon compte",
+    "ctaSecondary": "Se connecter",
+    "footer": "UEMOA · Nigeria · Ghana · Avril 2026"
+  },
+  "errors": {
+    "notFound": {
+      "overline": "Erreur",
+      "title": "Cette page n\u2019existe pas.",
+      "body": "Le lien que vous suivez est peut-être périmé, ou l\u2019adresse est mal orthographiée.",
+      "cta": "Retour à l\u2019accueil"
+    },
+    "generic": {
+      "overline": "Erreur",
+      "title": "Un imprévu s\u2019est glissé.",
+      "body": "Nous avons noté l\u2019incident. Réessayez dans un instant.",
+      "cta": "Réessayer"
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "accounts": "Comptes",
+    "transactions": "Mouvements",
+    "budget": "Budget",
+    "goals": "Objectifs",
+    "insights": "Récapitulatif",
+    "score": "Note",
+    "settings": "Réglages"
+  }
+}

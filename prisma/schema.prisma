@@ -1,0 +1,263 @@
+// Monétika — Schéma Prisma
+// v1.0 · Avril 2026
+// Voir PROMPT_MONETIKA_CLAUDE_CODE.md §5
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ————————————————————————————————————————————————————————
+// Utilisateur & session
+// ————————————————————————————————————————————————————————
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  emailVerified   DateTime?
+  firstName       String
+  lastName        String
+  phone           String?
+  dateOfBirth     DateTime?
+  countryCode     String
+  primaryCurrency String
+  locale          String    @default("fr")
+  pinHash         String?
+  timezone        String    @default("Africa/Porto-Novo")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  accounts       Account[]
+  transactions   Transaction[]
+  incomeSources  IncomeSource[]
+  budgets        Budget[]
+  goals          Goal[]
+  strategyConfig StrategyConfig?
+  sessions       Session[]
+  nefSnapshots   NefSnapshot[]
+  categories     Category[]
+  patterns       TransactionPattern[]
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessionToken String   @unique
+  expires      DateTime
+  ipAddress    String?
+  userAgent    String?
+
+  @@index([userId])
+}
+
+// ————————————————————————————————————————————————————————
+// Comptes
+// ————————————————————————————————————————————————————————
+
+enum AccountKind {
+  BANK_CHECKING
+  BANK_SAVINGS
+  BANK_TERM
+  BANK_PRO
+  MOBILE_MONEY
+  SECURITIES
+  CASH
+  OTHER
+}
+
+enum StrategyBucket {
+  NECESSITIES
+  EMERGENCY
+  EDUCATION
+  INVESTMENT
+  JOY
+  GIVE
+}
+
+model Account {
+  id             String          @id @default(cuid())
+  userId         String
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label          String
+  institution    String
+  kind           AccountKind
+  currency       String
+  currentBalance Decimal         @db.Decimal(18, 2)
+  color          String
+  icon           String
+  strategyBucket StrategyBucket?
+  isBlocked      Boolean         @default(false)
+  isArchived     Boolean         @default(false)
+  lastReconciled DateTime?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  transactions        Transaction[]   @relation("TxAccount")
+  counterTransactions Transaction[]   @relation("TxCounterAccount")
+  goalsTargeted       Goal[]          @relation("GoalTargetAccount")
+
+  @@index([userId, isArchived])
+}
+
+// ————————————————————————————————————————————————————————
+// Transactions
+// ————————————————————————————————————————————————————————
+
+enum TransactionKind {
+  EXPENSE
+  INCOME
+  TRANSFER
+  ADJUSTMENT
+}
+
+model Transaction {
+  id               String          @id @default(cuid())
+  userId           String
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId        String
+  account          Account         @relation("TxAccount", fields: [accountId], references: [id], onDelete: Cascade)
+  counterAccountId String?
+  counterAccount   Account?        @relation("TxCounterAccount", fields: [counterAccountId], references: [id], onDelete: SetNull)
+  kind             TransactionKind
+  amount           Decimal         @db.Decimal(18, 2)
+  currency         String
+  occurredAt       DateTime
+  categoryId       String?
+  category         Category?       @relation(fields: [categoryId], references: [id])
+  strategyBucket   StrategyBucket?
+  note             String?
+  merchant         String?
+  receiptUrl       String?
+  isRecurring      Boolean         @default(false)
+  recurrenceRule   String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@index([userId, occurredAt])
+  @@index([accountId, occurredAt])
+  @@index([userId, categoryId])
+}
+
+model Category {
+  id             String         @id @default(cuid())
+  userId         String?
+  user           User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  key            String
+  label          String
+  icon           String
+  color          String
+  strategyBucket StrategyBucket
+  parentId       String?
+  parent         Category?      @relation("CategoryParent", fields: [parentId], references: [id])
+  children       Category[]     @relation("CategoryParent")
+  isSystem       Boolean        @default(false)
+
+  transactions Transaction[]
+
+  @@unique([userId, key])
+  @@index([userId])
+}
+
+// Patterns d'apprentissage simple pour la suggestion 1-tap
+model TransactionPattern {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hourOfDay  Int
+  dayOfWeek  Int
+  amountBin  Int
+  categoryId String
+  accountId  String
+  frequency  Int      @default(1)
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, hourOfDay, dayOfWeek, amountBin, categoryId, accountId])
+  @@index([userId, frequency])
+}
+
+// ————————————————————————————————————————————————————————
+// Revenus récurrents, budgets, objectifs
+// ————————————————————————————————————————————————————————
+
+model IncomeSource {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label          String
+  kind           String
+  expectedAmount Decimal  @db.Decimal(18, 2)
+  currency       String
+  frequency      String
+  dayOfMonth     Int?
+  isActive       Boolean  @default(true)
+}
+
+model Budget {
+  id           String  @id @default(cuid())
+  userId       String
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId   String
+  monthlyLimit Decimal @db.Decimal(18, 2)
+  currency     String
+  alertAt70    Boolean @default(true)
+  alertAt90    Boolean @default(true)
+  blockAt100   Boolean @default(false)
+
+  @@unique([userId, categoryId])
+}
+
+model Goal {
+  id             String         @id @default(cuid())
+  userId         String
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  targetAmount   Decimal        @db.Decimal(18, 2)
+  currency       String
+  targetDate     DateTime
+  startingAmount Decimal        @db.Decimal(18, 2) @default(0)
+  currentAmount  Decimal        @db.Decimal(18, 2) @default(0)
+  strategyBucket StrategyBucket
+  accountId      String?
+  account        Account?       @relation("GoalTargetAccount", fields: [accountId], references: [id])
+  isAchieved     Boolean        @default(false)
+  achievedAt     DateTime?
+  createdAt      DateTime       @default(now())
+
+  @@index([userId, isAchieved])
+}
+
+model StrategyConfig {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  necessities Int      @default(55)
+  emergency   Int      @default(15)
+  education   Int      @default(10)
+  investment  Int      @default(10)
+  joy         Int      @default(5)
+  give        Int      @default(5)
+  updatedAt   DateTime @updatedAt
+}
+
+// ————————————————————————————————————————————————————————
+// Note d'Évolution Financière
+// ————————————————————————————————————————————————————————
+
+model NefSnapshot {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  score       Int
+  breakdown   Json
+  computedAt  DateTime @default(now())
+  periodStart DateTime
+  periodEnd   DateTime
+
+  @@index([userId, computedAt])
+}
