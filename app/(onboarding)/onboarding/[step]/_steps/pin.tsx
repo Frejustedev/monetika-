@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useActionState, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
@@ -18,18 +19,27 @@ export function PinStep({ hasPin }: Props) {
   const [stage, setStage] = useState<'first' | 'confirm'>('first');
   const [pin, setPin] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [resetting, setResetting] = useState(false);
   const [state, action, pending] = useActionState(savePinAction, initial);
 
   const canProceedFirst = pin.length === 6;
   const canSubmit = pin.length === 6 && confirm.length === 6;
 
-  if (hasPin && !state) {
+  if (hasPin && !resetting && !state) {
     return (
-      <div>
-        <p className="mb-6 text-sm text-muted-foreground">{t('alreadySet')}</p>
-        <Button size="lg" onClick={() => setStage('first')}>
-          {t('reset')}
-        </Button>
+      <div className="flex flex-col gap-4">
+        <p className="text-sm text-muted-foreground">{t('alreadySet')}</p>
+        <div className="flex flex-wrap gap-2">
+          <Button size="md" onClick={() => setResetting(true)}>
+            {t('reset')}
+          </Button>
+          <Link
+            href="/onboarding/V"
+            className="inline-flex h-11 items-center justify-center rounded-[10px] border border-border bg-transparent px-5 text-base font-medium text-foreground transition-colors hover:bg-[color:var(--surface)]"
+          >
+            {t('next')}
+          </Link>
+        </div>
       </div>
     );
   }
