@@ -229,6 +229,14 @@
       "empty": "Rien à afficher pour l\u2019instant."
     }
   },
+  "score": {
+    "title": "note d\u2019évolution",
+    "subtitle": "Relevé calculé le {date}. Valable ~24 h, recalculé chaque nuit.",
+    "breakdown": "Décomposition (7 critères)",
+    "recommendations": "Trois actions prioritaires",
+    "history": "Historique 12 mois",
+    "exportPdf": "Télécharger en PDF"
+  },
   "goals": {
     "list": {
       "title": "objectifs",

@@ -229,6 +229,14 @@
       "empty": "Nothing to show yet."
     }
   },
+  "score": {
+    "title": "financial momentum note",
+    "subtitle": "Computed on {date}. Valid ~24h, refreshed nightly.",
+    "breakdown": "Breakdown (7 criteria)",
+    "recommendations": "Three priority actions",
+    "history": "12-month history",
+    "exportPdf": "Download PDF"
+  },
   "goals": {
     "list": {
       "title": "goals",

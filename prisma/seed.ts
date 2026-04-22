@@ -438,7 +438,40 @@ async function main() {
     ],
   });
 
-  // 6. Budgets par défaut cohérents avec les dépenses seed
+  // 6. Snapshots NEF historiques (12 mois) pour alimenter la sparkline.
+  await prisma.nefSnapshot.deleteMany({ where: { userId: user.id } });
+  const currentNw = comptes.reduce((s, c) => s + c.balance, 0);
+  for (let i = 11; i >= 0; i--) {
+    const computedAt = new Date();
+    computedAt.setMonth(computedAt.getMonth() - i);
+    computedAt.setDate(1);
+    const base = 450 + Math.round(((11 - i) / 11) * 230);
+    const noise = Math.round((Math.random() - 0.5) * 40);
+    const score = Math.max(300, Math.min(900, base + noise));
+    const periodStart = new Date(computedAt);
+    periodStart.setMonth(periodStart.getMonth() - 3);
+    await prisma.nefSnapshot.create({
+      data: {
+        userId: user.id,
+        score,
+        breakdown: {
+          regularity: { score: 60 + Math.round(noise / 4), weight: 150 },
+          strategyAdherence: { score: 70, weight: 200 },
+          budgetDiscipline: { score: 55, weight: 150 },
+          savingsRate: { score: 45, weight: 150 },
+          goalProgress: { score: 50, weight: 100 },
+          diversification: { score: 80, weight: 100 },
+          trend: { score: 50, weight: 150 },
+          netWorthSnapshot: Math.round(currentNw * (0.8 + ((11 - i) / 11) * 0.25)),
+        },
+        computedAt,
+        periodStart,
+        periodEnd: computedAt,
+      },
+    });
+  }
+
+  // 7. Budgets par défaut cohérents avec les dépenses seed
   await prisma.budget.deleteMany({ where: { userId: user.id } });
   for (const b of DEFAULT_BUDGETS) {
     const cat = catByKey.get(b.key);
@@ -457,7 +490,7 @@ async function main() {
   }
 
   console.log(
-    `Seed: user ${user.email} · ${createdAccounts.length} comptes · ${tx.length} transactions · ${DEFAULT_BUDGETS.length} budgets · 3 objectifs`,
+    `Seed: user ${user.email} · ${createdAccounts.length} comptes · ${tx.length} transactions · ${DEFAULT_BUDGETS.length} budgets · 3 objectifs · 12 snapshots NEF`,
   );
 }
 
