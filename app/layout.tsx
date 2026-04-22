@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import { cookies } from 'next/headers';
 import { fraunces, instrumentSans, geistMono } from './fonts';
 import './globals.css';
 
@@ -67,9 +68,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale = await getLocale();
   const messages = await getMessages();
 
+  // Thème utilisateur — cookie NEXT_THEME, sinon suit prefers-color-scheme.
+  const cookieStore = await cookies();
+  const themePref = cookieStore.get('NEXT_THEME')?.value;
+  const themeAttr = themePref === 'light' || themePref === 'dark' ? themePref : undefined;
+
   return (
     <html
       lang={locale}
+      data-theme={themeAttr}
       className={`${fraunces.variable} ${instrumentSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >

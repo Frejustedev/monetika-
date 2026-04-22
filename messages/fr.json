@@ -229,6 +229,105 @@
       "empty": "Rien à afficher pour l\u2019instant."
     }
   },
+  "settings": {
+    "title": "réglages",
+    "subtitle": "Votre compte, votre stratégie, vos revenus, vos données.",
+    "sections": {
+      "profile": "Profil",
+      "security": "Sécurité",
+      "preferences": "Préférences",
+      "strategy": "Stratégie 6 comptes",
+      "income": "Revenus récurrents",
+      "dangerZone": "Zone sensible"
+    },
+    "profile": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "E-mail",
+      "emailHint": "Contactez le support pour changer d\u2019e-mail.",
+      "phone": "Téléphone",
+      "dateOfBirth": "Date de naissance",
+      "save": "Enregistrer",
+      "saving": "Enregistrement"
+    },
+    "security": {
+      "pinBody": "Changez votre PIN 6 chiffres quand vous le souhaitez.",
+      "changePin": "Changer mon PIN",
+      "currentPin": "PIN actuel",
+      "newPin": "Nouveau PIN",
+      "confirmPin": "Confirmer le nouveau PIN",
+      "cancel": "Annuler",
+      "save": "Enregistrer",
+      "saving": "Enregistrement",
+      "sessionsBody": "Authentification JWT — la déconnexion s\u2019applique à ce navigateur.",
+      "signOut": "Se déconnecter"
+    },
+    "preferences": {
+      "language": "Langue",
+      "country": "Pays de résidence",
+      "currency": "Devise principale",
+      "theme": "Thème",
+      "themes": {
+        "system": "Système",
+        "light": "Clair",
+        "dark": "Sombre"
+      },
+      "save": "Enregistrer",
+      "saving": "Enregistrement"
+    },
+    "strategy": {
+      "body": "Ajustez la répartition visée. Elle sert de référence au calcul de la note et aux insights.",
+      "save": "Enregistrer",
+      "saving": "Enregistrement"
+    },
+    "income": {
+      "body": "Déclarez vos revenus récurrents pour enrichir le calcul du taux d\u2019épargne.",
+      "empty": "Aucune source déclarée.",
+      "add": "Ajouter une source",
+      "edit": "Éditer",
+      "delete": "Supprimer",
+      "confirmDelete": "Supprimer",
+      "deleting": "Suppression",
+      "cancel": "Annuler",
+      "label": "Libellé",
+      "kind": "Type",
+      "expectedAmount": "Montant attendu",
+      "frequency": "Fréquence",
+      "dayOfMonthLabel": "Jour du mois",
+      "dayOfMonth": "le {day}",
+      "activeCheck": "Source active",
+      "inactive": "inactive",
+      "save": "Enregistrer",
+      "saving": "Enregistrement",
+      "kinds": {
+        "SALARY": "Salaire",
+        "RENT": "Loyer perçu",
+        "DIVIDENDS": "Dividendes",
+        "FREELANCE": "Activité libérale",
+        "REMITTANCE": "Transferts reçus",
+        "OTHER": "Autre"
+      },
+      "frequencies": {
+        "MONTHLY": "Mensuel",
+        "QUARTERLY": "Trimestriel",
+        "ANNUAL": "Annuel",
+        "VARIABLE": "Variable"
+      }
+    },
+    "danger": {
+      "exportTitle": "Exporter toutes mes données",
+      "exportBody": "Un JSON complet et lisible de votre compte, vos comptes, mouvements, budgets, objectifs et snapshots.",
+      "exportButton": "Télécharger JSON",
+      "deleteTitle": "Supprimer mon compte",
+      "deleteBody": "Action irréversible. Toutes vos données liées à {email} seront effacées.",
+      "deleteStart": "Je veux supprimer mon compte",
+      "confirmationLabel": "Tapez SUPPRIMER pour confirmer",
+      "confirmationHint": "Vérification finale avant suppression.",
+      "deleteConfirm": "Supprimer définitivement",
+      "cancel": "Annuler",
+      "deleting": "Suppression"
+    }
+  },
   "insights": {
     "title": "récapitulatif",
     "subtitle": "Ce que vous avez vécu, en chiffres.",
