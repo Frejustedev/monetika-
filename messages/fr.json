@@ -23,6 +23,153 @@
     "ctaSecondary": "Se connecter",
     "footer": "UEMOA · Nigeria · Ghana · Avril 2026"
   },
+  "auth": {
+    "signup": {
+      "overline": "Création de compte",
+      "title": "Ouvrons votre journal.",
+      "lede": "Quelques informations suffisent. Nous vous enverrons un lien de connexion à votre e-mail.",
+      "fields": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "E-mail",
+        "phone": "Téléphone (optionnel)",
+        "phoneHint": "Indicatif inclus, ex : +229 97 12 34 56"
+      },
+      "submit": "Recevoir le lien",
+      "submitting": "Envoi en cours",
+      "sent": {
+        "overline": "E-mail envoyé",
+        "title": "Regardez votre boîte de réception.",
+        "body": "Le lien de connexion expire dans 15 minutes. Si vous ne le voyez pas, vérifiez les indésirables."
+      }
+    },
+    "login": {
+      "overline": "Connexion",
+      "title": "Bienvenue.",
+      "lede": "Lien magique envoyé par e-mail, ou PIN 6 chiffres si vous l\u2019avez déjà défini.",
+      "modeLabel": "Mode de connexion",
+      "modes": {
+        "magic": "Lien magique",
+        "pin": "PIN 6 chiffres"
+      },
+      "fields": {
+        "email": "E-mail",
+        "pin": "PIN"
+      },
+      "requestMagic": "Envoyer le lien",
+      "submitPin": "Se connecter",
+      "sending": "Envoi en cours",
+      "sent": {
+        "overline": "E-mail envoyé",
+        "title": "Vérifiez votre boîte.",
+        "body": "Le lien de connexion expire dans 15 minutes."
+      }
+    },
+    "verify": {
+      "overline": "Vérification",
+      "waitTitle": "Ouvrez le lien reçu par e-mail.",
+      "waitBody": "Cette page se met à jour automatiquement une fois le lien confirmé.",
+      "expiredTitle": "Lien expiré.",
+      "expiredBody": "Demandez un nouveau lien — les liens de connexion restent actifs 15 minutes.",
+      "invalidTitle": "Lien invalide.",
+      "invalidBody": "Le lien a déjà été utilisé ou contient une erreur. Demandez-en un nouveau.",
+      "retry": "Retour à la connexion"
+    }
+  },
+  "onboarding": {
+    "back": "Précédent",
+    "steps": {
+      "I": {
+        "overline": "Étape I · Vous",
+        "title": "Qui êtes-vous ?",
+        "lede": "Ces informations restent locales à votre compte. Vous pourrez les modifier plus tard.",
+        "fields": {
+          "firstName": "Prénom",
+          "lastName": "Nom",
+          "phone": "Téléphone",
+          "dateOfBirth": "Date de naissance"
+        },
+        "continue": "Continuer",
+        "submitting": "Enregistrement"
+      },
+      "II": {
+        "overline": "Étape II · Votre marché",
+        "title": "Où vivez-vous ?",
+        "lede": "Le pays détermine la devise principale et les institutions pré-remplies à la création de compte.",
+        "continue": "Continuer",
+        "submitting": "Enregistrement"
+      },
+      "III": {
+        "overline": "Étape III · Confidentialité",
+        "title": "Votre journal, pas une banque.",
+        "lede": "Monétika ne garde aucun fonds, ne se connecte à aucune banque. Elle consigne ce que vous écrivez.",
+        "points": {
+          "one": "Pas d\u2019agrément PSP ou EME requis — c\u2019est vous qui tenez le journal.",
+          "two": "Vos chiffres sont stockés chiffrés sur Neon, en zone UE / US, accessibles à vous seul.",
+          "three": "Vous pouvez exporter ou supprimer vos données à tout moment depuis les Réglages."
+        },
+        "continue": "J\u2019ai compris",
+        "submitting": "Enregistrement"
+      },
+      "IV": {
+        "overline": "Étape IV · Sécurité",
+        "title": "Créez un code à 6 chiffres.",
+        "lede": "Ce PIN protège l\u2019accès à votre journal depuis votre téléphone. Choisissez des chiffres non évidents.",
+        "enterPin": "Saisissez votre PIN",
+        "confirmPin": "Confirmez votre PIN",
+        "next": "Suivant",
+        "back": "Modifier",
+        "submit": "Enregistrer",
+        "submitting": "Enregistrement",
+        "alreadySet": "Un PIN est déjà défini sur ce compte.",
+        "reset": "En définir un nouveau"
+      },
+      "V": {
+        "overline": "Étape V · Stratégie 6 comptes",
+        "title": "Répartissez votre revenu.",
+        "lede": "La répartition recommandée : 55 % nécessités, 15 % urgence, 10 % éducation, 10 % investissement, 5 % joie, 5 % partage. Le total doit faire 100.",
+        "continue": "Adopter cette stratégie",
+        "submitting": "Enregistrement"
+      },
+      "VI": {
+        "overline": "Étape VI · Premier compte",
+        "title": "Ajoutez votre premier compte.",
+        "lede": "Vous pourrez en ajouter d\u2019autres plus tard — un par institution.",
+        "fields": {
+          "kind": "Type de compte",
+          "institution": "Institution",
+          "label": "Libellé",
+          "labelPlaceholder": "Ex : Compte courant",
+          "balance": "Solde actuel",
+          "bucket": "Rattacher à"
+        },
+        "kinds": {
+          "BANK_CHECKING": "Courant",
+          "BANK_SAVINGS": "Épargne",
+          "BANK_TERM": "À terme",
+          "BANK_PRO": "Pro",
+          "MOBILE_MONEY": "Mobile Money",
+          "SECURITIES": "Titres",
+          "CASH": "Espèces",
+          "OTHER": "Autre"
+        },
+        "continue": "Enregistrer le compte",
+        "submitting": "Enregistrement",
+        "alreadyCreated": "Un premier compte a déjà été créé.",
+        "next": "Passer à l\u2019étape suivante"
+      },
+      "VII": {
+        "overline": "Étape VII · Bienvenue",
+        "title": "Votre journal est prêt.",
+        "lede": "Vous pouvez commencer à consigner vos mouvements dès maintenant.",
+        "hello": "Bienvenue.",
+        "helloName": "Bienvenue, {name}.",
+        "body": "Votre premier compte est enregistré, votre PIN est actif, votre stratégie est adoptée. Vous pouvez désormais saisir votre première entrée.",
+        "enter": "Ouvrir mon journal",
+        "finishing": "Finalisation"
+      }
+    }
+  },
   "errors": {
     "notFound": {
       "overline": "Erreur",

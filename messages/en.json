@@ -23,6 +23,153 @@
     "ctaSecondary": "Sign in",
     "footer": "WAEMU · Nigeria · Ghana · April 2026"
   },
+  "auth": {
+    "signup": {
+      "overline": "Create account",
+      "title": "Let\u2019s open your journal.",
+      "lede": "A few details will do. We will send a sign-in link to your e-mail.",
+      "fields": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "E-mail",
+        "phone": "Phone (optional)",
+        "phoneHint": "With dial code, e.g. +234 802 123 4567"
+      },
+      "submit": "Receive the link",
+      "submitting": "Sending",
+      "sent": {
+        "overline": "Email sent",
+        "title": "Check your inbox.",
+        "body": "The sign-in link expires in 15 minutes. If you don\u2019t see it, check spam."
+      }
+    },
+    "login": {
+      "overline": "Sign in",
+      "title": "Welcome back.",
+      "lede": "Magic link by e-mail, or 6-digit PIN if you already set one.",
+      "modeLabel": "Sign-in mode",
+      "modes": {
+        "magic": "Magic link",
+        "pin": "6-digit PIN"
+      },
+      "fields": {
+        "email": "E-mail",
+        "pin": "PIN"
+      },
+      "requestMagic": "Send the link",
+      "submitPin": "Sign in",
+      "sending": "Sending",
+      "sent": {
+        "overline": "Email sent",
+        "title": "Check your inbox.",
+        "body": "The sign-in link expires in 15 minutes."
+      }
+    },
+    "verify": {
+      "overline": "Verifying",
+      "waitTitle": "Open the link from your e-mail.",
+      "waitBody": "This page refreshes automatically once the link is confirmed.",
+      "expiredTitle": "Link expired.",
+      "expiredBody": "Request a new link — sign-in links remain valid for 15 minutes.",
+      "invalidTitle": "Invalid link.",
+      "invalidBody": "The link has been used already or contains an error. Request a new one.",
+      "retry": "Back to sign in"
+    }
+  },
+  "onboarding": {
+    "back": "Previous",
+    "steps": {
+      "I": {
+        "overline": "Step I · You",
+        "title": "Who are you?",
+        "lede": "These details stay local to your account. You can change them later.",
+        "fields": {
+          "firstName": "First name",
+          "lastName": "Last name",
+          "phone": "Phone",
+          "dateOfBirth": "Date of birth"
+        },
+        "continue": "Continue",
+        "submitting": "Saving"
+      },
+      "II": {
+        "overline": "Step II · Market",
+        "title": "Where do you live?",
+        "lede": "Country sets the primary currency and pre-fills institutions when adding accounts.",
+        "continue": "Continue",
+        "submitting": "Saving"
+      },
+      "III": {
+        "overline": "Step III · Privacy",
+        "title": "Your journal, not a bank.",
+        "lede": "Monétika holds no funds and connects to no bank. It records what you write.",
+        "points": {
+          "one": "No PSP or EMI license needed — you keep the journal.",
+          "two": "Your numbers are stored encrypted on Neon, EU/US regions, accessible to you only.",
+          "three": "You may export or delete your data at any moment from Settings."
+        },
+        "continue": "I understand",
+        "submitting": "Saving"
+      },
+      "IV": {
+        "overline": "Step IV · Security",
+        "title": "Create a 6-digit code.",
+        "lede": "This PIN protects access from your phone. Pick digits that aren\u2019t obvious.",
+        "enterPin": "Enter your PIN",
+        "confirmPin": "Confirm your PIN",
+        "next": "Next",
+        "back": "Edit",
+        "submit": "Save",
+        "submitting": "Saving",
+        "alreadySet": "A PIN is already set on this account.",
+        "reset": "Set a new one"
+      },
+      "V": {
+        "overline": "Step V · 6-bucket strategy",
+        "title": "Allocate your income.",
+        "lede": "Recommended: 55% necessities, 15% emergency, 10% education, 10% investment, 5% joy, 5% giving. Total must equal 100.",
+        "continue": "Adopt this strategy",
+        "submitting": "Saving"
+      },
+      "VI": {
+        "overline": "Step VI · First account",
+        "title": "Add your first account.",
+        "lede": "You can add more later — one per institution.",
+        "fields": {
+          "kind": "Account type",
+          "institution": "Institution",
+          "label": "Label",
+          "labelPlaceholder": "E.g. Main checking",
+          "balance": "Current balance",
+          "bucket": "Attach to"
+        },
+        "kinds": {
+          "BANK_CHECKING": "Checking",
+          "BANK_SAVINGS": "Savings",
+          "BANK_TERM": "Term",
+          "BANK_PRO": "Business",
+          "MOBILE_MONEY": "Mobile Money",
+          "SECURITIES": "Securities",
+          "CASH": "Cash",
+          "OTHER": "Other"
+        },
+        "continue": "Save account",
+        "submitting": "Saving",
+        "alreadyCreated": "A first account is already created.",
+        "next": "Go to next step"
+      },
+      "VII": {
+        "overline": "Step VII · Welcome",
+        "title": "Your journal is ready.",
+        "lede": "You can start recording entries right now.",
+        "hello": "Welcome.",
+        "helloName": "Welcome, {name}.",
+        "body": "Your first account is recorded, your PIN is set, your strategy is adopted. You can now log your first entry.",
+        "enter": "Open my journal",
+        "finishing": "Finishing"
+      }
+    }
+  },
   "errors": {
     "notFound": {
       "overline": "Error",

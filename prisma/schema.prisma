@@ -20,15 +20,18 @@ model User {
   id              String    @id @default(cuid())
   email           String    @unique
   emailVerified   DateTime?
-  firstName       String
-  lastName        String
+  // Champs collectés progressivement : nullable à la création (magic link),
+  // complétés à l'onboarding. onboardedAt verrouille l'état "compte prêt".
+  firstName       String?
+  lastName        String?
   phone           String?
   dateOfBirth     DateTime?
-  countryCode     String
-  primaryCurrency String
+  countryCode     String?
+  primaryCurrency String?
   locale          String    @default("fr")
   pinHash         String?
   timezone        String    @default("Africa/Porto-Novo")
+  onboardedAt     DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
@@ -42,6 +45,16 @@ model User {
   nefSnapshots   NefSnapshot[]
   categories     Category[]
   patterns       TransactionPattern[]
+}
+
+// Auth.js — magic link tokens (email provider).
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@index([expires])
 }
 
 model Session {

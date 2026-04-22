@@ -137,6 +137,42 @@
   }
 }
 
+/* Slider range Monétika — fil 4px bone, pouce 16px forest */
+.monetika-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--bone);
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+}
+.monetika-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--forest);
+  border: 2px solid var(--paper);
+  cursor: grab;
+  transition: transform var(--dur-fast) var(--ease);
+}
+.monetika-range::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+.monetika-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--forest);
+  border: 2px solid var(--paper);
+  cursor: grab;
+}
+.monetika-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ochre) 60%, transparent);
+}
+
 /* Mouvement réduit respecté */
 @media (prefers-reduced-motion: reduce) {
   *,
