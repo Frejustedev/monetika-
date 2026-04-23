@@ -13,6 +13,10 @@ import { WelcomeStep } from './_steps/welcome';
 
 const STEPS: readonly StepKey[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
+// Onboarding dépend de la session → rendu dynamique systématique,
+// pas de SSG (sinon Next.js essaie de pré-rendre sans cookies et la page sort blanche).
+export const dynamic = 'force-dynamic';
+
 type Props = { params: Promise<{ step: string }> };
 
 export default async function OnboardingStepPage({ params }: Props) {
@@ -70,6 +74,4 @@ export default async function OnboardingStepPage({ params }: Props) {
   );
 }
 
-export function generateStaticParams() {
-  return STEPS.map((step) => ({ step }));
-}
+// generateStaticParams retiré : dynamic = 'force-dynamic' suffit à couvrir les 7 steps.

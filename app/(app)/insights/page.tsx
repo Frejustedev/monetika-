@@ -327,7 +327,8 @@ function YearSelector({ year }: { year: number }) {
     <div className="flex items-center gap-2">
       <a
         href={`?view=year&year=${prev}`}
-        className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-[color:var(--surface)] hover:text-foreground"
+        aria-label="Année précédente"
+        className="flex h-11 w-11 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-[color:var(--surface)] hover:text-foreground"
       >
         ‹
       </a>
@@ -336,10 +337,11 @@ function YearSelector({ year }: { year: number }) {
       </p>
       <a
         href={`?view=year&year=${next}`}
+        aria-label="Année suivante"
         aria-disabled={year >= current}
-        className={`rounded-full p-1.5 transition-colors ${
+        className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors ${
           year >= current
-            ? 'text-muted-foreground/30 pointer-events-none'
+            ? 'pointer-events-none text-muted-foreground/30'
             : 'text-muted-foreground hover:bg-[color:var(--surface)] hover:text-foreground'
         }`}
       >

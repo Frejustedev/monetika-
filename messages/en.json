@@ -207,6 +207,7 @@
     }
   },
   "dashboard": {
+    "todayTitle": "today",
     "netWorth": {
       "overline": "Net worth",
       "multiCurrency": "{count, plural, one {# other currency} other {# other currencies}} not counted"

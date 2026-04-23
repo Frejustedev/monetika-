@@ -7,7 +7,8 @@ type Size = 'sm' | 'md' | 'lg';
 const BASE =
   'inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ' +
   'transition-colors duration-[var(--dur-fast)] ease-[var(--ease-monetika)] ' +
-  'disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none';
+  'disabled:opacity-50 disabled:pointer-events-none ' +
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ochre)] focus-visible:ring-offset-2 focus-visible:ring-offset-background';
 
 const VARIANTS: Record<Variant, string> = {
   primary:

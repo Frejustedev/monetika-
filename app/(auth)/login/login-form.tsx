@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
@@ -95,10 +95,13 @@ function PinForm() {
   const [pin, setPin] = useState('');
   const [state, action, pending] = useActionState(loginWithPinAction, initial);
 
-  if (state?.ok) {
-    router.refresh();
-    router.push('/');
-  }
+  // Rediriger en useEffect pour éviter "Cannot update component while rendering".
+  useEffect(() => {
+    if (state?.ok) {
+      router.refresh();
+      router.replace('/');
+    }
+  }, [state, router]);
 
   return (
     <form action={action} className="flex flex-col gap-8">

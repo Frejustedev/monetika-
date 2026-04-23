@@ -46,7 +46,7 @@ export function BudgetEditSheet({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-[color:var(--background)]/60 backdrop-blur-sm md:items-center"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-[color:var(--ink)]/40 md:items-center"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

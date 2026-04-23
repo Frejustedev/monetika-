@@ -126,13 +126,13 @@ export async function updatePreferencesAction(_prev: ActionResult | undefined, f
   const cookieStore = await cookies();
   cookieStore.set('NEXT_THEME', parsed.data.theme, {
     path: '/',
-    httpOnly: false,
+    httpOnly: true,
     sameSite: 'lax',
     maxAge: 60 * 60 * 24 * 365,
   });
   cookieStore.set('NEXT_LOCALE', parsed.data.locale, {
     path: '/',
-    httpOnly: false,
+    httpOnly: true,
     sameSite: 'lax',
     maxAge: 60 * 60 * 24 * 365,
   });

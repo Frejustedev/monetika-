@@ -4,7 +4,7 @@ import { fr, enUS } from 'date-fns/locale';
 import { getTranslations } from 'next-intl/server';
 import { requireOnboardedUser } from '@/lib/auth/session';
 import { getDashboardData } from '@/lib/db/queries/dashboard';
-import { Amount } from '@/components/money/Amount';
+import { AnimatedAmount } from '@/components/money/AnimatedAmount';
 import { StrategyBar } from '@/components/charts/StrategyBar';
 import { AccountRow } from '@/components/dashboard/AccountRow';
 import { TransactionRow } from '@/components/dashboard/TransactionRow';
@@ -28,7 +28,7 @@ export default async function DashboardPage() {
       {/* En-tête éditorial */}
       <header>
         <h1 className="editorial-title text-foreground" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}>
-          {locale === 'fr' ? 'aujourd\u2019hui' : 'today'}
+          {t('todayTitle')}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">{todayLabel}</p>
         <div className="rule-ochre mt-4" />
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
           {t('netWorth.overline')}
         </p>
         <div className="mt-3">
-          <Amount
+          <AnimatedAmount
             value={data.netWorth.primary}
             currency={data.netWorth.primaryCurrency as SupportedCurrency}
             locale={locale}

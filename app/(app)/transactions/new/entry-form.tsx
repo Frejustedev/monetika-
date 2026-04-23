@@ -85,7 +85,7 @@ export function EntryForm({ accounts, categories, topCategoryIds, suggestion, lo
   const disableSubmit = !amount || Number(amount) <= 0 || pending;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[color:var(--background)]/80 backdrop-blur-sm md:p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[color:var(--ink)]/40 md:p-6">
       <div className="relative flex h-[100dvh] w-full max-w-[460px] flex-col bg-background shadow-xl md:h-auto md:max-h-[92vh] md:rounded-[20px] md:border md:border-border">
         {/* Header — handle + close */}
         <header className="flex items-center justify-between border-b border-border px-5 pt-[env(safe-area-inset-top)] pt-4 pb-3 md:px-6">

@@ -207,6 +207,7 @@
     }
   },
   "dashboard": {
+    "todayTitle": "aujourd\u2019hui",
     "netWorth": {
       "overline": "Patrimoine net",
       "multiCurrency": "{count, plural, one {# autre devise} other {# autres devises}} non comptés"
