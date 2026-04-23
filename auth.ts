@@ -19,7 +19,7 @@ const pinSchema = z.object({
   pin: z.string().regex(/^\d{6}$/u),
 });
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({

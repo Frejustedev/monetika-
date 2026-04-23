@@ -3,11 +3,20 @@ import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { Wordmark } from '@/components/layout/Wordmark';
 import { auth } from '@/auth';
+import { prisma } from '@/lib/db/client';
 
 export default async function HomePage() {
   const session = await auth();
   if (session?.user?.onboardedAt) redirect('/dashboard');
-  if (session?.user && !session.user.onboardedAt) redirect('/onboarding/I');
+  // JWT peut être obsolète après complétion de l'onboarding — on revérifie côté DB.
+  if (session?.user) {
+    const fresh = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { onboardedAt: true },
+    });
+    if (fresh?.onboardedAt) redirect('/dashboard');
+    redirect('/onboarding/I');
+  }
 
   const t = await getTranslations('home');
 

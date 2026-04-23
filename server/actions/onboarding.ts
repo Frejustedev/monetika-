@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/db/client';
 import { requireAuthUser } from '@/lib/auth/session';
+import { unstable_update } from '@/auth';
 import { hashPin, isWeakPin, pinSchema } from '@/lib/auth/pin';
 import { COUNTRIES, getCountry, isCountryCode } from '@/lib/countries';
 import type { BucketKey } from '@/lib/strategy/buckets';
@@ -195,7 +196,14 @@ export async function completeOnboardingAction(): Promise<ActionResult> {
     where: { id: user.id },
     data: { onboardedAt: new Date() },
   });
-  redirect('/');
+  // Force le refresh du JWT : sans ça la session garde onboardedAt=null,
+  // le middleware boucle entre / et /onboarding/I.
+  try {
+    await unstable_update({});
+  } catch (error) {
+    console.error('[completeOnboardingAction] session update failed', error);
+  }
+  redirect('/dashboard');
 }
 
 export async function getOnboardingState() {
