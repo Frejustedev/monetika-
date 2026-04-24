@@ -78,10 +78,18 @@ export default async function HomePage() {
           </Link>
         </section>
 
-        <footer className="mt-16 border-t border-border pt-6">
+        <footer className="mt-16 flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
             {t('footer')}
           </p>
+          <nav className="flex gap-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <Link href="/legal/terms" className="hover:text-foreground">
+              Conditions
+            </Link>
+            <Link href="/legal/privacy" className="hover:text-foreground">
+              Confidentialité
+            </Link>
+          </nav>
         </footer>
       </div>
     </main>

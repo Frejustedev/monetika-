@@ -20,6 +20,8 @@ const nextConfig = {
           { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(self), microphone=(), geolocation=()' },
+          // HSTS : force HTTPS pendant 2 ans, include sous-domaines, preload-ready.
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
         ],
       },
     ];

@@ -68,8 +68,8 @@ export function EntryForm({ accounts, categories, topCategoryIds, suggestion, lo
   React.useEffect(() => {
     if (state?.ok) {
       const elapsed = performance.now() - mountedAtRef.current;
-      if (typeof window !== 'undefined') {
-        // Log perf (non bloquant, visible en dev console + analytics plus tard).
+      if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+        // Perf tracking réservé au dev — en prod, tracer via analytics plus tard.
         console.info(`[monetika] tx-entry %dms`, Math.round(elapsed));
       }
       router.replace('/dashboard');
